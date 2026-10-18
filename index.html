@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta Digital - Pollería</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>🍗 Pollería El Buen Sabor</h1>
+    <!-- Aquí se mostrará la mesa detectada automáticamente -->
+    <div id="info-mesa" class="badge-mesa">Cargando mesa...</div>
+  </header>
+
+  <main class="contenedor">
+    <section class="menu-seccion">
+      <h2>Nuestra Carta</h2>
+      <div class="grid-platillos" id="grid-platillos">
+        <!-- Los platos se cargarán dinámicamente con JavaScript -->
+      </div>
+    </section>
+
+    <!-- Resumen del Pedido (Carrito) -->
+    <aside class="resumen-pedido">
+      <h3>📥 Tu Pedido</h3>
+      <div id="lista-carrito">
+        <p class="vacio">No has seleccionado ningún plato aún.</p>
+      </div>
+      <div class="total-box">
+        <span>Total:</span>
+        <strong id="precio-total">S/ 0.00</strong>
+      </div>
+      <button id="btn-enviar" onclick="enviarPedido()" disabled>Enviar Pedido a Cocina</button>
+    </aside>
+  </main>
+
+  <!-- Modal para seleccionar cantidad y detalles antes de agregar -->
+  <div id="modal-detalle" class="modal hidden">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarModal()">&times;</span>
+      <img id="modal-img" src="" alt="Plato">
+      <h3 id="modal-titulo"></h3>
+      <p id="modal-descripcion"></p>
+      <p class="precio" id="modal-precio"></p>
+
+      <div class="control-cantidad">
+        <button onclick="cambiarCantidad(-1)">-</button>
+        <span id="modal-cantidad">1</span>
+        <button onclick="cambiarCantidad(1)">+</button>
+      </div>
+
+      <div class="campo-observaciones">
+        <label for="modal-notas">¿Alguna especificación?</label>
+        <textarea id="modal-notas" placeholder="Ej: Sin mayonesa, papas bien doradas, parte pecho..."></textarea>
+      </div>
+
+      <button class="btn-agregar" onclick="confirmarAgregar()">Agregar al Pedido</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
