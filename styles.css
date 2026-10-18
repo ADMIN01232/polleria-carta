@@ -10,15 +10,61 @@ body {
   color: #333;
 }
 
+/* Encabezado Principal Actualizado */
 header {
-  background-color: #b30000;
+  background: linear-gradient(135deg, #b30000 0%, #800000 100%);
   color: white;
-  text-align: center;
-  padding: 1rem;
+  padding: 20px 25px; /* <--- Aumentado el espacio vertical y horizontal */
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border-bottom: 3px solid #ffcc00;
+}
+
+/* Alineación del Logo y Título Actualizado */
+.header-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* <--- Un poco más de espacio entre logo y texto */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilo y marco del Logo - ¡MÁS GRANDE! */
+.logo-polleria {
+  width: 110px; /* <--- Aumentado de 65px a 110px */
+  height: 110px; /* <--- Aumentado de 65px a 110px */
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ffcc00; /* <--- Borde un poco más grueso para que resalte */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35); /* <--- Sombra un poco más profunda */
+  background-color: #fff;
+}
+
+.header-texto {
+  text-align: left;
+}
+
+.header-texto h1 {
+  font-size: 1.7rem; /* <--- Un poco más grande para equilibrar el logo */
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  margin-bottom: 6px;
+}
+
+/* Etiqueta de la Mesa Actualizada */
+.badge-mesa {
+  background-color: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.95rem; /* <--- Un poco más grande */
+  display: inline-block;
+  padding: 4px 15px; /* <--- Un poco más de padding lateral */
+  border-radius: 20px; /* <--- Bordes más redondeados */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.25);
 }
 
 .badge-mesa {
@@ -53,10 +99,10 @@ header {
 }
 
 .card-plato {
-  background: white;
+  background: rgb(255, 255, 255);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(203, 17, 17, 0.1);
   cursor: pointer;
   transition: transform 0.2s;
 }
