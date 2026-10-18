@@ -6,11 +6,14 @@ document.getElementById('info-mesa').innerText = `Mesa: ${numeroMesa}`;
 
 // 2. Menú de la Pollería
 const menu = [
-  { id: 1, nombre: '1/4 de Pollo a la Brasa', precio: 12.00, img: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400', desc: 'Incluye papas fritas y ensalada.' },
-  { id: 2, nombre: '1/2 Pollo a la Brasa', precio: 40.00, img: 'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400', desc: 'Incluye papas fritas familiares y ensalada.' },
-  { id: 3, nombre: '1 Pollo Entero a la Brasa', precio: 45.00, img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400', desc: 'Incluye papas familiares, ensalada y cremas.' },
+  { id: 1, nombre: '1/4 de Pollo a la Brasa', precio: 11.00, img: 'Imagenes/1 cuarto de pollo.jpg', desc: 'Incluye papas fritas y ensalada.' },
+  { id: 2, nombre: '1/2 Pollo a la Brasa', precio: 20.00, img: 'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400', desc: 'Incluye papas fritas familiares y ensalada.' },
+  { id: 3, nombre: '1 Pollo Entero a la Brasa', precio: 44.00, img: 'Imagenes/pollo entero.jpg', desc: 'Incluye papas familiares, ensalada y cremas.' },
   { id: 4, nombre: 'Porción de Papas Nativas', precio: 15.00, img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400', desc: 'Papas crujientes doradas al hilo.' },
-  { id: 5, nombre: 'Inca Kola 1.5L', precio: 12.00, img: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400', desc: 'Gaseosa helada.' }
+  { id: 5, nombre: 'Inca Kola 1.5L', precio: 10.00, img: 'Imagenes/incacola.jpg', desc: 'Gaseosa helada.' },
+  { id: 6, nombre: 'Jugos Frescos 1.5L', precio: 20.00, img: 'Imagenes/jugos de 20.jpg', desc: 'Jugo natural de fruta.' },
+  { id: 7, nombre: 'Mostrito', precio: 10.00, img: 'Imagenes/mostrito.jpg', desc: '1/8 de pollo con chaufa y papas.' },
+  { id: 8, nombre: 'Mostro', precio: 14.00, img: 'Imagenes/mostro.jpg', desc: '1/4 pollo con chaufa y papas.' },
 ];
 
 let carrito = [];
@@ -42,7 +45,7 @@ function abrirModal(plato) {
   platoSeleccionado = plato;
   cantidadActual = 1;
   document.getElementById('modal-titulo').innerText = plato.nombre;
-  document.getElementById('modal-descripcion').innerText = plato.desc;
+  document.getElementById('modal-descripcion').innerText = plato.desc || '';
   document.getElementById('modal-precio').innerText = `S/ ${plato.precio.toFixed(2)}`;
   document.getElementById('modal-img').src = plato.img;
   document.getElementById('modal-cantidad').innerText = cantidadActual;
@@ -74,7 +77,13 @@ function confirmarAgregar() {
   actualizarCarrito();
 }
 
-// Actualizar Vista del Carrito
+// Función para eliminar un ítem específico del carrito
+function eliminarDelCarrito(index) {
+  carrito.splice(index, 1);
+  actualizarCarrito();
+}
+
+// Actualizar Vista del Carrito (Con botón de Cancelar/Eliminar)
 function actualizarCarrito() {
   const contenedor = document.getElementById('lista-carrito');
   const btnEnviar = document.getElementById('btn-enviar');
@@ -92,12 +101,13 @@ function actualizarCarrito() {
   carrito.forEach((item, index) => {
     total += item.subtotal;
     const div = document.createElement('div');
-    div.style.marginBottom = '10px';
-    div.style.borderBottom = '1px solid #eee';
-    div.style.paddingBottom = '5px';
+    div.className = 'item-carrito';
     div.innerHTML = `
-      <strong>${item.cantidad}x ${item.nombre}</strong> - S/ ${item.subtotal.toFixed(2)}
-      ${item.notas ? `<br><small><em>Nota: ${item.notas}</em></small>` : ''}
+      <div class="item-info">
+        <strong>${item.cantidad}x ${item.nombre}</strong> - S/ ${item.subtotal.toFixed(2)}
+        ${item.notas ? `<br><small><em>Nota: ${item.notas}</em></small>` : ''}
+      </div>
+      <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})" title="Eliminar plato">❌</button>
     `;
     contenedor.appendChild(div);
   });
@@ -106,7 +116,7 @@ function actualizarCarrito() {
   btnEnviar.disabled = false;
 }
 
-// Enviar Pedido (Ejemplo enviando a WhatsApp del mozo/cocina)
+// Enviar Pedido a WhatsApp
 function enviarPedido() {
   let mensaje = `*NUEVO PEDIDO - MESA ${numeroMesa}*\n\n`;
   let total = 0;
@@ -119,8 +129,7 @@ function enviarPedido() {
 
   mensaje += `\n*TOTAL: S/ ${total.toFixed(2)}*`;
 
-  // Cambiar por el número de WhatsApp de la pollería
-  const telefonoPolleria = '921512207'; 
+  const telefonoPolleria = '90000000'; 
   const urlWhatsApp = `https://wa.me/${telefonoPolleria}?text=${encodeURIComponent(mensaje)}`;
 
   window.open(urlWhatsApp, '_blank');
