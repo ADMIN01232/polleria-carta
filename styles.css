@@ -12,47 +12,73 @@ body {
 
 /* Encabezado Principal Actualizado */
 header {
-  background: linear-gradient(135deg, #b30000 0%, #800000 100%);
-  color: white;
-  padding: 20px 25px; /* <--- Aumentado el espacio vertical y horizontal */
+  position: relative;
+  background: linear-gradient(135deg, #8b0000 0%, #600000 100%);
+  padding: 20px;
+  overflow: hidden;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  border-bottom: 3px solid #ffcc00;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* Alineación del Logo y Título Actualizado */
+/* Esquinas decorativas amarillas y rojas */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(135deg, #ffcc00 0%, #ffcc00 35%, #ffffff 35%, #ffffff 45%, transparent 45%);
+  pointer-events: none;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(-135deg, #ffcc00 0%, #ffcc00 35%, #ffffff 35%, #ffffff 45%, transparent 45%);
+  pointer-events: none;
+}
+
 .header-contenido {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px; /* <--- Un poco más de espacio entre logo y texto */
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 15px;
 }
 
-/* Estilo y marco del Logo - ¡MÁS GRANDE! */
 .logo-polleria {
-  width: 110px; /* <--- Aumentado de 65px a 110px */
-  height: 110px; /* <--- Aumentado de 65px a 110px */
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #ffcc00; /* <--- Borde un poco más grueso para que resalte */
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35); /* <--- Sombra un poco más profunda */
+  border: 3px solid #ffcc00;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
   background-color: #fff;
 }
 
-.header-texto {
-  text-align: left;
-}
-
 .header-texto h1 {
-  font-size: 1.7rem; /* <--- Un poco más grande para equilibrar el logo */
+  font-size: 1.6rem;
   font-weight: 800;
   color: #ffffff;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-  margin-bottom: 6px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  margin-bottom: 4px;
+}
+
+.badge-mesa {
+  background-color: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 4px 14px;
+  border-radius: 20px;
 }
 
 /* Etiqueta de la Mesa Actualizada */
@@ -231,4 +257,140 @@ header {
   margin-top: 15px;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* ==========================================
+   EFECTO DE HUMO VERDE DE ALTA VISIBILIDAD
+   ========================================== */
+
+body {
+  position: relative;
+  /* Mantenemos el fondo cálido */
+  background-color: #f2ede4 !important;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor que ocupa toda la pantalla de fondo */
+.contenedor-humo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Asegura que no interfiera con los clics */
+  z-index: 0; /* Detrás de la carta */
+  overflow: hidden;
+}
+
+/* Estilo base de cada nube de humo - ¡AHORA VERDE! */
+.humo {
+  position: absolute;
+  bottom: -150px;
+  width: 250px;
+  height: 250px;
+  /* Degradado VERDE INTENSO */
+  background: radial-gradient(circle, rgba(50, 205, 50, 0.7) 0%, rgba(34, 139, 34, 0.4) 40%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  filter: blur(25px); /* Menos desenfoque para que sea más definido */
+  opacity: 0;
+  animation: flotarHumo 9s infinite linear;
+}
+
+/* Posiciones a lo largo de la pantalla */
+.humo.h1 {
+  left: 10%;
+  width: 300px;
+  height: 300px;
+  animation-duration: 8s;
+  animation-delay: 0s;
+}
+
+.humo.h2 {
+  left: 35%;
+  width: 400px;
+  height: 400px;
+  animation-duration: 11s;
+  animation-delay: 2.5s;
+}
+
+.humo.h3 {
+  left: 60%;
+  width: 280px;
+  height: 280px;
+  animation-duration: 9s;
+  animation-delay: 5s;
+}
+
+.humo.h4 {
+  left: 85%;
+  width: 350px;
+  height: 350px;
+  animation-duration: 10s;
+  animation-delay: 1s;
+}
+
+/* Animación del Humo Verde */
+@keyframes flotarHumo {
+  0% {
+    transform: translateY(0) scale(0.7) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8; /* ¡Mucha opacidad al inicio! */
+  }
+  60% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.6) rotate(60deg);
+    opacity: 0;
+  }
+}
+
+/* Mantenemos el contenido por encima del humo */
+main, header, aside, .card-plato {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================
+   ESTILO CALIGRÁFICO MANUSCRITO Y DORADO
+   ========================================== */
+
+.titulo-seccion {
+  text-align: left;
+  margin: 20px 0 10px 0;
+  padding: 5px 0;
+}
+
+.texto-caligrafico {
+  font-family: 'Caveat', 'Great Vibes', cursive, sans-serif;
+  font-size: 3.2rem;            /* Tamaño grande para destacar la caligrafía */
+  font-weight: 700;
+  color: #e29828;                /* Tono dorado cálido idéntico a la imagen */
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra suave para darle relieve */
+  transform: rotate(-1.5deg);    /* Ligera inclinación natural de manuscrito */
+  display: inline-block;
+}
+/* Título manuscrito en dorado pincel */
+.contenedor-titulo-carta {
+  margin: 20px 0 10px 0;
+  text-align: left;
+}
+
+.titulo-manuscrito {
+  font-family: 'Yellowtail', 'Caveat', cursive !important;
+  font-size: 3rem !important;
+  color: #e59d23 !important; /* Tono dorado de la referencia */
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-weight: normal !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-transform: none !important;
 }
